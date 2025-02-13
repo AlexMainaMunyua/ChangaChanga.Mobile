@@ -46,6 +46,8 @@ class _ChanelListState extends State<ChanelList> {
       setState(() {
         _accessToken = accessToken;
       });
+    }else{
+      _accessToken = "";
     }
   }
 
@@ -388,58 +390,93 @@ class _ChanelListState extends State<ChanelList> {
                                                                         _isLoadingChannel =
                                                                             index;
                                                                       });
-                                                                      ChannelRead channelData = await readChannel(
-                                                                          widget
-                                                                              .userChannelList![index]
-                                                                              .channel_id
-                                                                              .toString(),
-                                                                          _accessToken!);
-                                                                      if (channelData
-                                                                              .channel_status !=
-                                                                          1) {
-                                                                        try {
-                                                                          List<dynamic>?
-                                                                              userChannelListData =
-                                                                              await userChannelList(_accessToken!);
-                                                                          if (userChannelListData
-                                                                              .isNotEmpty) {
-                                                                            List<Channels>?
-                                                                                userChannels =
-                                                                                userChannelListData.map((item) => Channels.fromJson(item)).toList();
-                                                                            Navigator.push(context,
-                                                                                MaterialPageRoute(builder: (context) => ChanelList(userChannelList: userChannels)));
-                                                                          } else {
-                                                                            Navigator.push(context,
-                                                                                MaterialPageRoute(builder: (context) => const StartPage()));
-                                                                          }
-                                                                        } catch (e) {
-                                                                          final snackBar =
-                                                                              SnackBar(
-                                                                            /// need to set following properties for best effect of awesome_snackbar_content
-                                                                            elevation:
-                                                                                0,
-                                                                            behavior:
-                                                                                SnackBarBehavior.floating,
-                                                                            backgroundColor:
-                                                                                Colors.transparent,
-                                                                            content:
-                                                                                AwesomeSnackbarContent(
-                                                                              title: 'On Snap!',
-                                                                              message: '$e',
 
-                                                                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                                                              contentType: ContentType.failure,
-                                                                            ),
-                                                                          );
 
-                                                                          // ignore: use_build_context_synchronously
-                                                                          ScaffoldMessenger.of(
-                                                                              context)
-                                                                            ..hideCurrentSnackBar()
-                                                                            ..showSnackBar(snackBar);
-                                                                        }
-                                                                        return;
-                                                                      }
+
+                                                                      // Assigning data to ChannelRead instance
+                                                                      ChannelRead chanelData = ChannelRead(
+                                                                        channel_id: 'ch001',
+                                                                        account_id: 'acc001',
+                                                                        runningBalance: 1200.50,
+                                                                        link: 'https://www.example.com/channel1',
+                                                                        goal: 'Reach 10,000 subscribers',
+                                                                        channelCode: 'C1A2345',
+                                                                        videoUrl: 'https://www.example.com/video/channel1',
+                                                                        imageUrl: 'https://images.unsplash.com/photo-1601510731643-c0b09e2f5055',
+                                                                        description: 'This is the first channel.',
+                                                                        target: '10000 subscribers',
+                                                                        title: 'Channel 1',
+                                                                        join_link_code: 'join123',
+                                                                        payment_link_code: 'pay123',
+                                                                        channel_privacy: 'Public',
+                                                                        imageFile: null, // Example for file, can be assigned later
+                                                                        close_condition: 'Minimum 5000 subscribers',
+                                                                        category_id: 1,
+                                                                        creator_id: 'user01',
+                                                                      //  creator: creator, // Assigning the creator data
+                                                                       // category: category, // Assigning the category
+                                                                        categ: 'Tech', // Short category name
+                                                                        channel_status: 1, // Active
+                                                                        is_active: true,
+                                                                        created_date_utc: '2025-02-13T00:00:00Z',
+                                                                        total_collected: 5000.75,
+                                                                       // participants: participants, // Assigning the list of participants
+                                                                      );
+                                                                      // ChannelRead channelData = await readChannel(
+                                                                      //     widget
+                                                                      //         .userChannelList![index]
+                                                                      //         .channel_id
+                                                                      //         .toString(),
+                                                                      //     _accessToken!);
+
+                                                                     // ChannelRead chanelData = ChannelRead();
+
+                                                                      // if (channelData
+                                                                      //         .channel_status !=
+                                                                      //     1) {
+                                                                      //   try {
+                                                                      //     List<dynamic>?
+                                                                      //         userChannelListData =
+                                                                      //         await userChannelList(_accessToken!);
+                                                                      //     if (userChannelListData
+                                                                      //         .isNotEmpty) {
+                                                                      //       List<Channels>?
+                                                                      //           userChannels =
+                                                                      //           userChannelListData.map((item) => Channels.fromJson(item)).toList();
+                                                                      //       Navigator.push(context,
+                                                                      //           MaterialPageRoute(builder: (context) => ChanelList(userChannelList: userChannels)));
+                                                                      //     } else {
+                                                                      //       Navigator.push(context,
+                                                                      //           MaterialPageRoute(builder: (context) => const StartPage()));
+                                                                      //     }
+                                                                      //   } catch (e) {
+                                                                      //     final snackBar =
+                                                                      //         SnackBar(
+                                                                      //       /// need to set following properties for best effect of awesome_snackbar_content
+                                                                      //       elevation:
+                                                                      //           0,
+                                                                      //       behavior:
+                                                                      //           SnackBarBehavior.floating,
+                                                                      //       backgroundColor:
+                                                                      //           Colors.transparent,
+                                                                      //       content:
+                                                                      //           AwesomeSnackbarContent(
+                                                                      //         title: 'On Snap!',
+                                                                      //         message: '$e',
+                                                                      //
+                                                                      //         /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                                                      //         contentType: ContentType.failure,
+                                                                      //       ),
+                                                                      //     );
+                                                                      //
+                                                                      //     // ignore: use_build_context_synchronously
+                                                                      //     ScaffoldMessenger.of(
+                                                                      //         context)
+                                                                      //       ..hideCurrentSnackBar()
+                                                                      //       ..showSnackBar(snackBar);
+                                                                      //   }
+                                                                      //   return;
+                                                                      // }
                                                                       // ignore: use_build_context_synchronously
                                                                       Navigator
                                                                           .push(
@@ -448,7 +485,33 @@ class _ChanelListState extends State<ChanelList> {
                                                                           builder: (context) =>
                                                                               ChannelDashboard(
                                                                             channelData:
-                                                                                channelData,
+                                                                                ChannelRead(
+                                                                                  channel_id: 'ch001',
+                                                                                  account_id: 'acc001',
+                                                                                  runningBalance: 1200.50,
+                                                                                  link: 'https://www.example.com/channel1',
+                                                                                  goal: 'Reach 10,000 subscribers',
+                                                                                  channelCode: 'C1A2345',
+                                                                                  videoUrl: 'https://www.example.com/video/channel1',
+                                                                                  imageUrl: 'https://plus.unsplash.com/premium_vector-1719374656644-b00f8808ef26?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                                                                                  description: 'This is the first channel.',
+                                                                                  target: '10000 subscribers',
+                                                                                  title: 'Channel 1',
+                                                                                  join_link_code: 'join123',
+                                                                                  payment_link_code: 'pay123',
+                                                                                  channel_privacy: 'Public',
+                                                                                  imageFile: null, // Example for file, can be assigned later
+                                                                                  close_condition: 'Minimum 5000 subscribers',
+                                                                                  category_id: 1,
+                                                                                  creator_id: 'user01',
+                                                                                  //  creator: creator, // Assigning the creator data
+                                                                                  // category: category, // Assigning the category
+                                                                                  categ: 'Tech', // Short category name
+                                                                                  channel_status: 1, // Active
+                                                                                  is_active: true,
+                                                                                  created_date_utc: '2025-02-13T00:00:00Z',
+                                                                                  total_collected: 5000.75,
+                                                                                ),
                                                                             accessToken:
                                                                                 _accessToken!,
                                                                           ),
